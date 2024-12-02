@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Редагувати замовлення{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-6">Редагувати замовлення</h1>
+    
+    <form method="POST" class="space-y-4">
+        <!-- Вибір продукту -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Продукт</label>
+            <select name="product_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                {% for product in products %}
+                    <option value="{{ product._id }}" {% if order.product_id == product._id %}selected{% endif %}>
+                        {{ product.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- Вибір клієнта -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Клієнт</label>
+            <select name="client_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                {% for client in clients %}
+                    <option value="{{ client._id }}" {% if order.client_id == client._id or order.client_id == client._id|string %}selected{% endif %}>
+                        {{ client.name}} 
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- Кількість -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Кількість</label>
+            <input type="number" name="quantity" value="{{ order.quantity }}" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+        </div>
+        
+        <!-- Дата замовлення -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Дата замовлення</label>
+            <input type="date" name="order_date" value="{{ order.order_date.strftime('%Y-%m-%d') }}" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+        </div>
+        
+        <!-- Статус -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Статус</label>
+            <select name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="Pending" {% if order.status == "Pending" %}selected{% endif %}>Очікує</option>
+                <option value="Completed" {% if order.status == "Completed" %}selected{% endif %}>Виконано</option>
+                <option value="Cancelled" {% if order.status == "Cancelled" %}selected{% endif %}>Скасовано</option>
+            </select>
+        </div>
+        
+        <!-- Кнопки -->
+        <div class="flex justify-end space-x-4">
+            <a href="/orders" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                Скасувати
+            </a>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Зберегти зміни
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

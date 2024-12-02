@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Головна{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h1 class="text-4xl font-bold text-gray-800 mb-8">Ласкаво просимо до Каталогу продуктів і замовлень</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="/products" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-xl font-semibold mb-2">Продукти</h2>
+            <p class="text-gray-600">Переглянути всі продукти</p>
+        </a>
+        <a href="/orders" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-xl font-semibold mb-2">Замовлення</h2>
+            <p class="text-gray-600">Управління замовленнями</p>
+        </a>
+        <a href="/clients" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-xl font-semibold mb-2">Клієнти</h2>
+            <p class="text-gray-600">Переглянути всіх клієнтів</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
